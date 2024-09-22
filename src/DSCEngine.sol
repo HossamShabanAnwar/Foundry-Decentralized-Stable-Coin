@@ -31,8 +31,7 @@ import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-import {console} from "forge-std/Test.sol";
-
+import {OracleLib} from "./libraries/OracleLib.sol";
 /**
  * @title DSCEngine
  * @author Hossam Elanany
@@ -50,6 +49,7 @@ import {console} from "forge-std/Test.sol";
  * @notice This contract is the core of the DSC system. It handles all the logic for minting and redeeming DSC, as well as depositing & withdrawing collateral.
  * @notice This contract is VERY loosely based on the make MakerDAO DSS (DAI) system.
  */
+
 contract DSCEngine is ReentrancyGuard {
     /////////////////////////
     //////// Errors /////////
@@ -63,6 +63,11 @@ contract DSCEngine is ReentrancyGuard {
     error DSCEngine__HealthFactorOk();
     error DSCEngine__HealthFactorNotImproved();
     error DSCEngine__AmountExceedsCollateral();
+
+    ////////////////////////
+    //////// Types /////////
+    ////////////////////////
+    using OracleLib for AggregatorV3Interface;
 
     /////////////////////////
     //// State Variables ////
@@ -115,6 +120,7 @@ contract DSCEngine is ReentrancyGuard {
         }
         for (uint256 i = 0; i < tokenAddresses.length; i++) {
             s_priceFeeds[tokenAddresses[i]] = priceFeedAddresses[i];
+            s_collateralTokens.push(tokenAddresses[i]);
         }
         i_dsc = DecentralizedStableCoin(DSCAddress);
     }
@@ -176,11 +182,11 @@ contract DSCEngine is ReentrancyGuard {
      * @param collateralAmount The amount of collateral to deposit.
      * @param amountDSCToBurn The amount of DSC to burn.
      */
-    function redeemCollateralAndBurnDSC(address collateralTokenAddress, uint256 collateralAmount, uint256 amountDSCToBurn)
-        external
-        moreThanZero(collateralAmount)
-        isAllowedToken(collateralTokenAddress)
-    {
+    function redeemCollateralAndBurnDSC(
+        address collateralTokenAddress,
+        uint256 collateralAmount,
+        uint256 amountDSCToBurn
+    ) external moreThanZero(collateralAmount) isAllowedToken(collateralTokenAddress) {
         _burnDSC(amountDSCToBurn, msg.sender, msg.sender);
         _redeemCollateral(collateralTokenAddress, collateralAmount, msg.sender, msg.sender);
         _revertIfHealthFactorIsBroken(msg.sender);
@@ -314,13 +320,11 @@ contract DSCEngine is ReentrancyGuard {
     /**
      * @notice - Returns how close to liquidation a user is. If a user goes below 1, that means he can't get liquidated.
      */
-    // TODO: This function logic needs to be updated
     function _healthFactor(address user) internal view returns (uint256) {
         (uint256 totalDSCMinted, uint256 collateralValueInUSD) = _getAccountInformation(user);
         return _calculateHealthFactor(totalDSCMinted, collateralValueInUSD);
     }
 
-    // TODO: Both _healthFactor() and _revertIfHealthFactorIsBroken() functions can be merged in a single function
     function _revertIfHealthFactorIsBroken(address user) internal view {
         uint256 userHealthFactor = _healthFactor(user);
         if (userHealthFactor < MIN_HEALTH_FACTOR) {
@@ -346,7 +350,7 @@ contract DSCEngine is ReentrancyGuard {
 
     function _getUSDValue(address token, uint256 amount) private view returns (uint256 valueInUSD) {
         AggregatorV3Interface priceFeed = AggregatorV3Interface(s_priceFeeds[token]);
-        (, int256 price,,,) = priceFeed.latestRoundData();
+        (, int256 price,,,) = priceFeed.staleCheckLatestRoundData();
         valueInUSD = (uint256(price) * ADDITIONAL_FEED_PRECISION * amount) / PRECISION;
         return valueInUSD;
     }
@@ -374,7 +378,7 @@ contract DSCEngine is ReentrancyGuard {
         returns (uint256 collateralAmount)
     {
         AggregatorV3Interface priceFeed = AggregatorV3Interface(s_priceFeeds[token]);
-        (, int256 price,,,) = priceFeed.latestRoundData();
+        (, int256 price,,,) = priceFeed.staleCheckLatestRoundData();
         collateralAmount = ((collateralValueInUSD * PRECISION) / (uint256(price) * ADDITIONAL_FEED_PRECISION));
         return collateralAmount;
     }
