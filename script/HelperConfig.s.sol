@@ -34,10 +34,10 @@ contract HelperConfig is Script {
      */
     function getSepoliaETHConfig() public view returns (NetworkConfig memory) {
         return NetworkConfig({
-            wETHUSDPriceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419,
-            wBTCUSDPriceFeed: 0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c,
-            wETH: 0xdd13E55209Fd76AfE204dBda4007C227904f0a81,
-            wBTC: 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063,
+            wETHUSDPriceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419, // ChainLink oracle price feed address for ETH/USD
+            wBTCUSDPriceFeed: 0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c, // ChainLink oracle price feed address for BTC/USD
+            wETH: 0xdd13E55209Fd76AfE204dBda4007C227904f0a81, // ERC20 wETH token smart contract address on Sepolia
+            wBTC: 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063, // ERC20 wETH token smart contract address on Sepolia
             deployerKey: vm.envUint("PRIVATE_KEY")
         });
     }
@@ -59,8 +59,8 @@ contract HelperConfig is Script {
         return NetworkConfig({
             wETHUSDPriceFeed: address(ETHUSDPriceFeed),
             wBTCUSDPriceFeed: address(BTCUSDPriceFeed),
-            wETH: address(wBTCMock),
-            wBTC: address(wETHMock),
+            wETH: address(wETHMock),
+            wBTC: address(wBTCMock),
             deployerKey: DEFAULT_ANVIL_KEY
         });
     }
