@@ -1,66 +1,86 @@
-## Foundry
+# EARN STABLE COIN
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
+![Forge](https://img.shields.io/badge/forge-v0.2.0-blue.svg?style=for-the-badge)
+![Solc](https://img.shields.io/badge/solc-v0.8.20-blue.svg?style=for-the-badge)
+[![GitHub License](https://img.shields.io/github/license/hossamanany/Foundry-Decentralized-Stable-Coin?style=for-the-badge)](https://github.com/hossamanany/Foundry-Decentralized-Stable-Coin/blob/master/LICENSE)
 
-Foundry consists of:
+[![LinkedIn: hossamanany](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=LinkedIn&logoColor=f5f5f5)](https://linkedin.com/in/hossamanany)
+[![Twitter: hsmanany](https://img.shields.io/badge/@N0_crypto-black?style=for-the-badge&logo=X)](https://twitter.com/hsmanany)
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Documentation
+## About
+This repo contains a collateralized stable coin implementation. The system is desinged to be as minimal as possible, and have the tokens maintain the USD price
+This stablecoin has the properties:
 
-https://book.getfoundry.sh/
+1. Relative Stability: Anchored or Pegged - 1 USD
+    1. Chainlink Price feed
+    2. Set a function to exchange Collateral -> USD
+2. Stability Mechanism (Minting): Algorithmic (Decentralized)
+    1. People can only mint the stablecoin with enough collateral (coded)
+3. Collateral: Exogenous/Endogenous (Crypto)
+    1. wETH
+    2. wBTC
 
-## Usage
+The collaterall tokens used are wrapped BTC and wrapped ETH.
 
-### Build
+TODO:  
+1. Fee and interest payment with EARN token.
+2. Automatic liquidation on price drop
 
-```shell
-$ forge build
+## Installation
+
+### Install dependencies
+```bash
+$ make install
 ```
 
-### Test
+## Usage
+Before running any commands, create a .env file and add the following environment variables:
+```bash
+# network configs
+RPC_LOCALHOST="http://127.0.0.1:8545"
 
-```shell
+# ethereum nework
+RPC_ETH_SEPOLIA=<rpc url>
+RPC_ETH_MAIN=<rpc url>
+ETHERSCAN_KEY=<api key>
+
+```
+
+### Run tests
+```bash
 $ forge test
 ```
 
-### Format
-
-```shell
-$ forge fmt
+### Deploy contract on testnet
+```bash
+$ make deploy-testnet
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+### Deploy contract on mainnet
+```bash
+$ make deploy-mainnet
 ```
 
-### Anvil
+## Deployments
 
-```shell
-$ anvil
-```
+### Testnet
 
-### Deploy
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+## Author
 
-### Cast
+👤 **Hossam Elanany**
 
-```shell
-$ cast <subcommand>
-```
+* Twitter: [@N0\_crypto](https://twitter.com/hsmanany)
+* Github: [@trashpirate](https://github.com/hossamanany)
+* LinkedIn: [@nadinaoates](https://linkedin.com/in/hossamanany)
 
-### Help
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## 📝 License
+
+Copyright © 2024 [Hossam Elanany](https://github.com/hossamanany).
+
+This project is [MIT](https://github.com/hossamanany/Foundry-Decentralized-Stable-Coin/blob/master/LICENSE) licensed.
+
+
