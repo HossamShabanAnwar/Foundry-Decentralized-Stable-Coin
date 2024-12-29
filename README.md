@@ -3,7 +3,6 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
 ![Forge](https://img.shields.io/badge/forge-v0.2.0-blue.svg?style=for-the-badge)
 ![Solc](https://img.shields.io/badge/solc-v0.8.20-blue.svg?style=for-the-badge)
-[![GitHub License](https://img.shields.io/github/license/hossamanany/Foundry-Decentralized-Stable-Coin?style=for-the-badge)](https://github.com/hossamanany/Foundry-Decentralized-Stable-Coin/blob/master/LICENSE)
 
 [![LinkedIn: hossamanany](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=LinkedIn&logoColor=f5f5f5)](https://linkedin.com/in/hossamanany)
 [![Twitter: hsmanany](https://img.shields.io/badge/@N0_crypto-black?style=for-the-badge&logo=X)](https://twitter.com/hsmanany)
@@ -72,12 +71,9 @@ $ make deploy-mainnet
 
 👤 **Hossam Elanany**
 
-* Twitter: [@N0\_crypto](https://twitter.com/hsmanany)
-* Github: [@trashpirate](https://github.com/hossamanany)
-* LinkedIn: [@nadinaoates](https://linkedin.com/in/hossamanany)
-
-
-## 📝 License
+* Twitter: [@hsmanany](https://twitter.com/hsmanany)
+* Github: [@HossamElanany](https://github.com/hossamanany)
+* LinkedIn: [@HossamElanany](https://linkedin.com/in/hossamanany)
 
 Copyright © 2024 [Hossam Elanany](https://github.com/hossamanany).
 
