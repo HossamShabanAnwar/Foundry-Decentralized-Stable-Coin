@@ -5,7 +5,7 @@
 ![Solc](https://img.shields.io/badge/solc-v0.8.20-blue.svg?style=for-the-badge)
 
 [![LinkedIn: hossamanany](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=LinkedIn&logoColor=f5f5f5)](https://linkedin.com/in/hossamanany)
-[![Twitter: hsmanany](https://img.shields.io/badge/@N0_crypto-black?style=for-the-badge&logo=X)](https://twitter.com/hsmanany)
+[![Twitter: hsmanany](https://img.shields.io/badge/@hsmanany?style=for-the-badge&logo=X)](https://twitter.com/hsmanany)
 
 
 ## About
