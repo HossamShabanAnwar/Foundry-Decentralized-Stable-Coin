@@ -1,13 +1,5 @@
 # EARN STABLE COIN
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
-![Forge](https://img.shields.io/badge/forge-v0.2.0-blue.svg?style=for-the-badge)
-![Solc](https://img.shields.io/badge/solc-v0.8.20-blue.svg?style=for-the-badge)
-
-[![LinkedIn: hossamanany](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=LinkedIn&logoColor=f5f5f5)](https://linkedin.com/in/hossamanany)
-[![Twitter: hsmanany](https://img.shields.io/badge/@hsmanany?style=for-the-badge&logo=X)](https://twitter.com/hsmanany)
-
-
 ## About
 This repo contains a collateralized stable coin implementation. The system is desinged to be as minimal as possible, and have the tokens maintain the USD price
 This stablecoin has the properties:
@@ -22,10 +14,6 @@ This stablecoin has the properties:
     2. wBTC
 
 The collaterall tokens used are wrapped BTC and wrapped ETH.
-
-TODO:  
-1. Fee and interest payment with EARN token.
-2. Automatic liquidation on price drop
 
 ## Installation
 
@@ -65,18 +53,4 @@ $ make deploy-mainnet
 ## Deployments
 
 ### Testnet
-
-
-## Author
-
-👤 **Hossam Elanany**
-
-* Twitter: [@hsmanany](https://twitter.com/hsmanany)
-* Github: [@HossamElanany](https://github.com/hossamanany)
-* LinkedIn: [@HossamElanany](https://linkedin.com/in/hossamanany)
-
-Copyright © 2024 [Hossam Elanany](https://github.com/hossamanany).
-
-This project is [MIT](https://github.com/hossamanany/Foundry-Decentralized-Stable-Coin/blob/master/LICENSE) licensed.
-
 
